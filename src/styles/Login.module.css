@@ -1,5 +1,31 @@
 .card {
     width: 410px;
+    padding: 30px;
+    border: 1px solid #4318ff;
+    border-radius: 20px 0px 0px 20px;
+}
+
+.card2 {
+    width: 450px;
+    padding: 30px;
+    text-align: center;
+    color: #fff;
+    background-color: #4318ff;
+    border-radius: 0px 20px 20px 0px;
+}
+
+.card3 {
+    width: 450px;
+    padding: 57px 30px;
+    text-align: center;
+    color: #fff;
+    background-color: #4318ff;
+    border-radius: 0px 20px 20px 0px;
+}
+
+.text2 {
+    margin: auto;
+    padding: 40% 0;
 }
 
 .title {
@@ -57,6 +83,12 @@
     padding-bottom: 19px;
 }
 
+.boxForgot {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .forgot {
     display: flex;
     align-items: center;
@@ -64,6 +96,29 @@
 
 .forgot2 {
     margin: 40px 0;
+}
+
+.forgot2 a {
+    text-decoration: none;
+    color: #2b3674;
+}
+
+.forgot2 a:focus {
+    color: red;
+}
+
+.forgot3 {
+    margin: 10px 0;
+    margin-bottom: 20px;
+}
+
+.forgot3 a {
+    text-decoration: none;
+    color: #2b3674;
+}
+
+.forgot3 a:focus {
+    color: red;
 }
 
 .fieldInput {

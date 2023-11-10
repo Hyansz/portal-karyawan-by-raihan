@@ -135,13 +135,18 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className={styles.forgot}>
-          <input
-            type="checkbox"
-            checked={rememberMe}
-            onChange={handleRememberMeChange}
-          />
-          <div className={styles.forgot2}>Ingat Saya</div>
+        <div className={styles.boxForgot}>
+          <div className={styles.forgot}>
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={handleRememberMeChange}
+            />
+            <div className={styles.forgot2}>Ingat Saya</div>
+          </div>
+          <div className={styles.forgot2}>
+            <a href='./daftar'>Belum Punya Akun?</a>
+          </div>
         </div>
         <button
           className={styles.buttonPrimary}
@@ -149,6 +154,13 @@ export default function Login() {
         >
           {isLoading ? 'Loading...' : 'Sign In'}
         </button>
+      </div>
+      
+      <div className={styles.card2}>
+        <div className={styles.text2}>
+          <h1>Selamat Datang</h1>
+          <p>Silahkan <b>Login</b> terlebih dahulu <br/> sebelum masuk ke dalam web.</p>
+        </div>
       </div>
     </div>
   );

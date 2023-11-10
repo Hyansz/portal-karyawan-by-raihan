@@ -7,7 +7,7 @@ export default function Daftar() {
     const router = useRouter();
 
     const [name, setName] = useState("");
-    const [nis, setNis] = useState("");
+    const [email, setEmail] = useState(""); // Mengganti nis menjadi email
     const [password, setPassword] = useState("");
 
     return (
@@ -26,18 +26,19 @@ export default function Daftar() {
                             setName(e.target.value);
                         }}
                         className={styles.input}
-                        placeholder="your full name"
+                        placeholder="Enter Your Full Name"
                     />
                 </div>
                 <div className={styles.fieldInput}>
                     <div className={styles.label}>
-                        NIS<span className={styles.star}>*</span>
+                        Email<span className={styles.star}>*</span>{" "}
+                        {/* Mengganti NIS menjadi Email */}
                     </div>
                     <input
                         className={styles.input}
-                        placeholder="12345"
+                        placeholder="example@example.com" // Mengganti placeholder sesuai dengan format email
                         onChange={(e) => {
-                            setNis(e.target.value);
+                            setEmail(e.target.value);
                         }}
                     />
                 </div>
@@ -54,10 +55,15 @@ export default function Daftar() {
                         }}
                     />
                 </div>
+                <div className={styles.boxForgot}>
+                    <div className={styles.forgot3}>
+                        <a href='./login'>Sudah Punya Akun?</a>
+                    </div>
+                </div>
                 <button
                     className={styles.buttonPrimary}
                     onClick={async () => {
-                        const data = { name, nis, password };
+                        const data = { name, email, password }; // Mengganti nis menjadi email
                         console.log("click daftar by: ", data);
 
                         try {
@@ -93,6 +99,16 @@ export default function Daftar() {
                 >
                     Daftar
                 </button>
+            </div>
+
+            <div className={styles.card3}>
+                <div className={styles.text2}>
+                    <h1>Selamat Datang</h1>
+                    <p>
+                        Silahkan <b>Daftar</b> terlebih dahulu <br /> sebelum masuk ke
+                        dalam web.
+                    </p>
+                </div>
             </div>
         </div>
     );
