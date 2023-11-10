@@ -91,7 +91,7 @@ export default function Login() {
         if (responseData.message === 'Password not found') {
           alert('Password tidak ditemukan');
         } else if (responseData.message === 'NIS not found') {
-          alert('NIS tidak ditemukan');
+          alert('Name tidak ditemukan');
         } else {
           alert(responseData.message);
         }
