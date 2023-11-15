@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     const user = await Users.findOne({ token });
     console.log('user: ', user);
 
-    if (!user || !user.nis) {
+    if (!user || !user.nip) {
       return res.status(400).json({
         error: false,
         message: 'token tidak valid atau sudah logout',
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
 
     // delete token
     const users = await Users.findOneAndUpdate(
-      { nis: user.nis },
+      { nip: user.nip },
       { token: '' },
       { new: true }
     );

@@ -13,10 +13,10 @@ export default async function handler(req, res) {
         .json({ error: true, message: 'mehtod tidak diijinkan' });
     }
 
-    const { nis, password } = req.body;
+    const { nip, password } = req.body;
     // validasi kosong atau tidak
 
-    if (!nis) {
+    if (!nip) {
       return res.status(400).json({ error: true, message: 'NIP tidak ditemukan' });
     }
 
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
 
     // validasi sesuai kreteria atau tidak
 
-    if (nis.length !== 5) {
+    if (nip.length !== 5) {
       return res.status(400).json({
         error: true,
         message: 'NIP harus 5 karakter',
@@ -42,11 +42,11 @@ export default async function handler(req, res) {
       });
     }
     // cek apakah user ada
-    const user = await Users.findOne({ nis, password });
+    const user = await Users.findOne({ nip, password });
 
     console.log('user: ', user);
 
-    if (!user || !user.nis) {
+    if (!user || !user.nip) {
       return res.status(400).json({
         error: true,
         message: 'user tidak ditemukan',
@@ -60,7 +60,7 @@ export default async function handler(req, res) {
 
     // jika sudah sesuai simpan
     const users = await Users.findOneAndUpdate(
-      { nis, password },
+      { nip, password },
       { token },
       { new: true }
     );

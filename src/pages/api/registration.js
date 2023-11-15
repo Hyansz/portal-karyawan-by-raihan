@@ -13,14 +13,14 @@ export default async function handler(req, res) {
         .json({ error: true, message: 'mehtod tidak diijinkan' });
     }
 
-    const { name, nis, password } = req.body;
+    const { name, nip, password } = req.body;
     // validasi dari client (ada atau tidak)
     if (!name) {
       return res.status(400).json({ error: true, message: 'tidak ada Nama' });
     }
 
-    if (!nis) {
-      return res.status(400).json({ error: true, message: 'tidak ada NIS' });
+    if (!nip) {
+      return res.status(400).json({ error: true, message: 'tidak ada NIP' });
     }
 
     if (!password) {
@@ -37,10 +37,10 @@ export default async function handler(req, res) {
       });
     }
 
-    if (nis.length !== 5) {
+    if (nip.length !== 5) {
       return res.status(400).json({
         error: true,
-        message: 'nis harus 5 karakter',
+        message: 'nip harus 5 karakter',
       });
     }
 
@@ -50,28 +50,28 @@ export default async function handler(req, res) {
         message: 'password harus diantar 6 sampai 10 karakter',
       });
     }
-    // cek apakah id atau nis sudah digunakan
-    const user = await Users.findOne({ nis });
+    // cek apakah id atau nip sudah digunakan
+    const user = await Users.findOne({ nip });
     console.log('user: ', user);
 
-    if (user && user.nis) {
+    if (user && user.nip) {
       return res.status(400).json({
         error: true,
-        message: 'nis sudah pernah didaftarkan',
+        message: 'nip sudah pernah didaftarkan',
       });
     }
 
     // lengkapi data yg kurang
     const id = uuid();
 
-    const data = { id, name, nis, password };
+    const data = { id, name, nip, password };
 
     // jika sudah sesuai simpan
     const users = new Users(data);
     await users.save();
 
     // kasih tahu client (hanya data yg diperbolehkan)
-    return res.status(201).json({ id: users.id, nis: users.nis });
+    return res.status(201).json({ id: users.id, nip: users.nip });
   } catch (error) {
     console.log('error:', error);
     res

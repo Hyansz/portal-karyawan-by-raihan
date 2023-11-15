@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     const user = await Users.findOne({ token });
     console.log('user: ', user);
 
-    if (!user || !user.nis) {
+    if (!user || !user.nip) {
       deleteCookie('token', { req, res });
 
       return res.status(400).json({
@@ -35,7 +35,7 @@ export default async function handler(req, res) {
     // kasih tahu client (hanya data yg diperbolehkan)
     return res
       .status(200)
-      .json({ id: user.id, nis: user.nis, name: user.name });
+      .json({ id: user.id, nip: user.nip, name: user.name });
   } catch (error) {
     console.log('error:', error);
     res
