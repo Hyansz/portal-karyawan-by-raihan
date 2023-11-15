@@ -10,6 +10,7 @@ export default function Login() {
   const [nip, setNip] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isKeepLogin, setKeepLogin] = useState(false);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -51,16 +52,14 @@ export default function Login() {
         const responseData = await res.json();
         alert('Sukses login');
 
-        // Set cookie jika "Ingat Saya" dicentang
-        if (rememberMe) {
-          setCookie('token', responseData.token, {
-            maxAge: 60 * 60 * 24 * 7, // Expired dalam 7 hari
-            path: '/',
-          });
+        console.log('responseData: ', responseData); //ex: {token: 'Id2Qs257T0', isKeepLogin: true}
+        localStorage.setItem('keepLogin', responseData.isKeepLogin);
+        if (!responseData.isKeepLogin) {
+          sessionStorage.setItem('token', responseData.token);
         }
 
         // Simpan nilai input terakhir ke dalam localStorage
-        localStorage.setItem('lastInput', JSON.stringify({ nip, password }));
+        localStorage.setItem('lastInput', JSON.stringify({ nip, password, isKeepLogin }));
 
         router.push('/dashboard');
       } else {
@@ -111,10 +110,17 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className={styles.boxForgot}>
-          <div className={styles.forgot2}>
-            <a href='./daftar'>Belum Punya Akun?</a>
-          </div>
+        <div>
+          <input
+            type="checkbox"
+            onChange={(e) => {
+              console.log(e.target.checked);
+              let isChecked = e.target.checked;
+              localStorage.setItem('keepLogin', isChecked);
+              setKeepLogin(isChecked);
+            }}
+          ></input>
+          <span> Keep Me Logged In</span>
         </div>
         <button
           className={styles.buttonPrimary}
@@ -122,6 +128,11 @@ export default function Login() {
         >
           {isLoading ? 'Loading...' : 'Sign In'}
         </button>
+        <div className={styles.boxForgot}>
+          <div className={styles.forgot2}>
+            <a href='./daftar'>Belum Punya Akun?</a>
+          </div>
+        </div>
       </div>
       
       <div className={styles.card2}>
