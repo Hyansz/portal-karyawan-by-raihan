@@ -51,14 +51,14 @@ export default function Home() {
     if (myCookieValue) {
       router.push('/dashboard');
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     const myCookieValue = getCookie('token');
     if (!myCookieValue) {
       router.push('/login');
     }
-  }, []);
+  }, [router]);
 
   return <></>;
 }
