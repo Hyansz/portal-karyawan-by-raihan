@@ -9,6 +9,7 @@ export default function Daftar() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState(""); // Mengganti nis menjadi email
     const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
         <div className={`${styles.container} ${dmSans.className}`}>
@@ -65,6 +66,7 @@ export default function Daftar() {
                     onClick={async () => {
                         const data = { name, email, password }; // Mengganti nis menjadi email
                         console.log("click daftar by: ", data);
+                        setIsLoading(true);
 
                         try {
                             const res = await fetch("/api/registration", {
@@ -94,10 +96,12 @@ export default function Daftar() {
                             alert(
                                 "Terjadi Kesalahan, harap hubungi team support"
                             );
+                        } finally {
+                            setIsLoading(false); // Matikan efek loading setelah permintaan selesai
                         }
                     }}
                 >
-                    Daftar
+                    {isLoading ? 'Loading...' : 'Daftar'}
                 </button>
             </div>
 

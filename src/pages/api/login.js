@@ -17,13 +17,13 @@ export default async function handler(req, res) {
     // validasi kosong atau tidak
 
     if (!nis) {
-      return res.status(400).json({ error: true, message: 'tidak ada NIS' });
+      return res.status(400).json({ error: true, message: 'NIP tidak ditemukan' });
     }
 
     if (!password) {
       return res
         .status(400)
-        .json({ error: true, message: 'tidak ada Password' });
+        .json({ error: true, message: 'Password Salah' });
     }
 
     // validasi sesuai kreteria atau tidak
@@ -31,14 +31,14 @@ export default async function handler(req, res) {
     if (nis.length !== 5) {
       return res.status(400).json({
         error: true,
-        message: 'nis harus 5 karakter',
+        message: 'NIP harus 5 karakter',
       });
     }
 
     if (password.length < 6 || password.length >= 10) {
       return res.status(400).json({
         error: true,
-        message: 'password harus diantar 6 sampai 10 karakter',
+        message: 'Password harus diantar 6 sampai 10 karakter',
       });
     }
     // cek apakah user ada
